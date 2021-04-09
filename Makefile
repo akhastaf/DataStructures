@@ -2,9 +2,9 @@ C = gcc
 FLAG = -Wall -Wextra -Werror
 NAME = datastructures.a
 
-SRC = srcs/stack.c srcs/queue.c
+SRC = srcs/stack.c srcs/queue.c srcs/hashtable.c srcs/linkedlist.c srcs/utils.c
 
-OBJ = stack.o queue.o
+OBJ = stack.o queue.o hashtable.o linkedlist.o utils.o
 
 
 all: $(NAME)
