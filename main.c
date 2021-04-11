@@ -5,33 +5,37 @@ int     main()
     // t_stack *stack;
     t_hash_table *t;
     char *k,*v;
-    t_key_value *kv1, *kv2, *kv3, *kv4;
+    void *kv1, *kv2, *kv3, *kv4, *kv5;
+    t_key_value    *s;
 
     kv1 = malloc(sizeof(t_key_value));
     kv2 = malloc(sizeof(t_key_value));
     kv3 = malloc(sizeof(t_key_value));
     kv4 = malloc(sizeof(t_key_value));
-    init_hashtable(&t, 10);
+    kv5 = malloc(sizeof(t_key_value));
+    init_hashtable(&t, 4);
     
-    kv1->key = strdup("Firstame");
-    kv1->value = strdup("Abderrazzaq");
-    insert_to_table(t, kv1, strlen(kv1->key));
+    insert_to_table(t, strdup("Firstame"), strdup("Abderrazzaq"), 8);
 
-    kv2->key = strdup("Age");
-    kv2->value = strdup("27");
-    insert_to_table(t, kv2, strlen(kv2->key));
+    insert_to_table(t, strdup("Age"), "27", 3);
 
-    kv3->key = strdup("Job");
-    kv3->value = strdup("Develeopper");
-    insert_to_table(t, kv3, strlen(kv3->key));
+    insert_to_table(t, strdup("Job"), strdup("Develeopper"), 3);
 
-    kv4->key = strdup("Lastname");
-    kv4->value = strdup("Khastaf");
-    insert_to_table(t, kv4, strlen(kv4->key));
+    insert_to_table(t, strdup("Lastname"), strdup("Khastaf"), 8);
 
+    insert_to_table(t, strdup("email"), strdup("akhastaf@student.1337.ma"), 5);
 
     print_ht(t);
-
+    printf("---------------------------------\n");
+    t_list *l, *l1;
+    l = get_keys(t);
+    ft_lstprint(l);
+    printf("---------------------------------\n");
+    l1 = get_values(t);
+    ft_lstprint(l1);
+    printf("---------------------------------\n");
+    s = get_key_value(t, "email", 5);
+    printf("%s\n", s->value);
 
     // t_queue *q;
     // int *t;

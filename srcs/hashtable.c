@@ -33,13 +33,17 @@ unsigned int    hash_code(const void *key, size_t   size, int lenght)
     return (code % lenght);
 }
 
-void    insert_to_table(t_hash_table *ht, t_key_value *kv, size_t size)
+void    insert_to_table(t_hash_table *ht,void *k,void *v, size_t size)
 {
     unsigned int id;
     t_list *new;
+    t_key_value *kv;
 
+    kv = malloc(sizeof(t_key_value));
+    kv->key = k;
+    kv->value = v;
     new = ft_lstnew(kv);
-    id = hash_code(kv->key, size, ht->lenght);
+    id = hash_code(k, size, ht->lenght);
     if (!ht->backets[id])
         ht->backets[id] = new;
     else
@@ -82,17 +86,21 @@ t_list          *get_keys(t_hash_table *ht)
 {
     t_list  *new;
     t_list  *tmp;
+    t_list *tmp1;
     size_t  i;
 
     new = NULL;
+
     tmp = NULL;
     i = 0;
     while (i < ht->lenght)
     {
-        if (ht->backets[i]->data)
+        tmp = ht->backets[i];
+        while (tmp)
         {
-            tmp = ft_lstnew(((t_key_value*)ht->backets[i]->data)->key);
-            ft_lstadd_back(&new, tmp);
+            tmp1 = ft_lstnew(((t_key_value*)tmp->data)->key);
+            ft_lstadd_back(&new, tmp1);
+            tmp = tmp->next;
         }
         i++;
     }
@@ -103,6 +111,7 @@ t_list          *get_values(t_hash_table *ht)
 {
     t_list  *new;
     t_list  *tmp;
+    t_list  *tmp1;
     size_t  i;
 
     new = NULL;
@@ -110,10 +119,12 @@ t_list          *get_values(t_hash_table *ht)
     i = 0;
     while (i < ht->lenght)
     {
-        if (ht->backets[i]->data)
+        tmp = ht->backets[i];
+        while (tmp)
         {
-            tmp = ft_lstnew(((t_key_value*)ht->backets[i]->data)->value);
-            ft_lstadd_back(&new, tmp);
+            tmp1 = ft_lstnew(((t_key_value*)tmp->data)->value);
+            ft_lstadd_back(&new, tmp1);
+            tmp = tmp->next;
         }
         i++;
     }
@@ -128,6 +139,7 @@ void    print_ht(t_hash_table *ht)
     i = 0;
     while (i < ht->lenght)
     {
+        printf("%zu\n", i);
         if (ht->backets[i])
         {
             tmp = ht->backets[i];

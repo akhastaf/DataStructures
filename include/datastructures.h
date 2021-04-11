@@ -56,7 +56,7 @@ void    clear_queue(t_queue **queue, void (*f)(void *));
 
 
 void            init_hashtable(t_hash_table **ht, size_t lenght);
-void            insert_to_table(t_hash_table *ht, t_key_value *kv, size_t size);
+void            insert_to_table(t_hash_table *ht,void *k,void *v, size_t size);
 void            *get_value(t_hash_table *ht, void *key, size_t size);
 t_key_value     *get_key_value(t_hash_table *ht, void *key, size_t size);
 t_list          *get_keys(t_hash_table *ht);
@@ -73,6 +73,9 @@ t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstnew(void *data);
 int		ft_lstsize(t_list *lst);
+void	ft_lstprint(t_list *lst);
+
+
 
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);

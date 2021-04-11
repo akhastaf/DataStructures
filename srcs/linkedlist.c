@@ -107,3 +107,15 @@ int		ft_lstsize(t_list *lst)
 	}
 	return (i);
 }
+
+void	ft_lstprint(t_list *lst)
+{
+	t_list *tmp;
+
+	tmp = lst;
+	while (tmp)
+	{
+		printf("%s\n", tmp->data);
+		tmp = tmp->next;
+	}
+}
